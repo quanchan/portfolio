@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function IntroHero() {
 	return (
-		<div className="w-full">
+		<div className="relative z-10 w-full">
 			<p className="mb-4 text-sm uppercase tracking-[0.3em] text-neutral-400">Software Engineer Portfolio</p>
 			<motion.h1
 				initial={{ opacity: 0, y: 24 }}
@@ -10,7 +10,7 @@ export default function IntroHero() {
 				transition={{ duration: 0.7, ease: 'easeOut' }}
 				className="max-w-3xl text-5xl font-semibold leading-tight tracking-tight text-white md:text-7xl"
 			>
-				Anh Quan (Alan) Tran
+				ALAN TRAN
 			</motion.h1>
 			<motion.p
 				initial={{ opacity: 0, y: 20 }}

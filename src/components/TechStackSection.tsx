@@ -1,7 +1,5 @@
 import {
-	SiAstro,
 	SiDocker,
-	SiFramer,
 	SiGit,
 	SiJest,
 	SiMongodb,
