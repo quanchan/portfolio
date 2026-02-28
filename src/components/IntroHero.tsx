@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-const portraitSrc = `${import.meta.env.BASE_URL}/assets/portrait.jpg`;
+const portraitSrc = `${import.meta.env.BASE_URL}/assets/portrait.avif`;
 
 export default function IntroHero() {
   return (

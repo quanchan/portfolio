@@ -61,8 +61,7 @@ export default function ExperienceTimeline() {
       >
         <h2
           className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
-            text-5xl leading-[1.1] font-light tracking-tight text-transparent
-            md:text-6xl"
+            text-5xl leading-[1.1] tracking-tight text-transparent md:text-6xl"
         >
           My career &amp;
           <br />

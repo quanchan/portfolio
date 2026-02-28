@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const base = import.meta.env.BASE_URL;
 const img = (name: string) => `${base}/assets/project_img/${name}`;
+const gradient = (name: string) => `${base}/assets/gradients/${name}`;
 
 type Project = {
   number: string;
@@ -19,55 +20,67 @@ const projects: Project[] = [
   {
     number: '01',
     category: 'WEB APP',
+    title: 'PTE Magic',
+    description:
+      'Full-featured web application for students to practice for the ' +
+      'PTE test with microservice architecture and robust data persistence.',
+    images: [
+      img('ptemagic1.avif'),
+      img('ptemagic2.avif'),
+      img('ptemagic3.avif'),
+    ],
+    imageType: 'web',
+    tech: ['Next.js', 'Java', 'Spring Boot', 'PostgreSQL'],
+    cardBg: gradient('gradient3.avif'),
+  },
+  {
+    number: '02',
+    category: 'WEB APP',
     title: 'Datawise',
     description:
       'Configurable database generation platform supporting ' +
       'multi-table schemas, 60+ data types, and relational constraints ' +
       'with cross-vendor SQL output.',
-    images: [img('datawise1.png'), img('datawise2.png'), img('datawise3.png')],
+    images: [
+      img('datawise1.avif'),
+      img('datawise2.avif'),
+      img('datawise3.avif'),
+    ],
     imageType: 'web',
     tech: ['Next.js', 'Chakra UI', 'PostgreSQL', 'Docker'],
-    cardBg: 'linear-gradient(135deg, #f97316 0%, #d97706 100%)',
-  },
-  {
-    number: '02',
-    category: 'MOBILE APP',
-    title: 'TodoRPG',
-    description:
-      'Full-stack mobile app with cloud server ' +
-      'that gamifies personal development and task management.',
-    images: [img('todo-rpg1.png'), img('todo-rpg2.png'), img('todo-rpg3.png')],
-    imageType: 'mobile',
-    tech: ['React Native', 'Expo', 'Java', 'Spring Boot'],
-    cardBg: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    cardBg: gradient('gradient1.avif'),
   },
   {
     number: '03',
-    category: 'WEB APP',
-    title: 'PTE Magic',
-    description:
-      'Full-featured web application for students to practice for the ' +
-      'PTE test with microservice architecture and robust data persistence.',
-    images: [img('ptemagic1.png'), img('ptemagic2.png'), img('ptemagic3.png')],
-    imageType: 'web',
-    tech: ['Next.js', 'Java', 'Spring Boot', 'PostgreSQL'],
-    cardBg: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-  },
-  {
-    number: '04',
     category: 'WEB APP',
     title: 'Valentine',
     description:
       "Interactive Valentine's Day web experience " +
       'with animations and personalized messages.',
     images: [
-      img('valentine1.jpg'),
-      img('valentine2.jpg'),
-      img('valentine3.png'),
+      img('valentine1.avif'),
+      img('valentine2.avif'),
+      img('valentine3.avif'),
     ],
     imageType: 'web',
     tech: ['React', 'TypeScript', 'Framer Motion'],
-    cardBg: 'linear-gradient(135deg, #f43f5e 0%, #e11d48 100%)',
+    cardBg: gradient('gradient4.avif'),
+  },
+  {
+    number: '04',
+    category: 'MOBILE APP',
+    title: 'TodoRPG',
+    description:
+      'Full-stack mobile app with cloud server ' +
+      'that gamifies personal development and task management.',
+    images: [
+      img('todo-rpg1.avif'),
+      img('todo-rpg2.avif'),
+      img('todo-rpg3.avif'),
+    ],
+    imageType: 'mobile',
+    tech: ['React Native', 'Expo', 'Java', 'Spring Boot'],
+    cardBg: gradient('gradient2.avif'),
   },
 ];
 
@@ -87,8 +100,8 @@ function MacbookFrame({
     <div className={`flex h-full w-full flex-col ${className ?? ''}`}>
       {/* Lid */}
       <div
-        className="flex flex-1 flex-col rounded-lg border
-          border-neutral-500/50 bg-neutral-900 p-[3px] shadow-xl"
+        className="flex flex-1 flex-col rounded-lg border border-neutral-500/50
+          bg-neutral-900 p-[3px] shadow-xl"
       >
         {/* Camera */}
         <div className="flex shrink-0 justify-center py-[3px]">
@@ -115,28 +128,26 @@ function MacbookFrame({
 function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   return (
     <div
-      className="relative h-full w-full overflow-hidden rounded-2xl
-        border-[3px] border-neutral-600 bg-neutral-900 shadow-2xl"
+      className="relative h-full w-full overflow-hidden rounded-2xl border-[3px]
+        border-neutral-600 bg-neutral-900 shadow-2xl"
     >
       {/* Power button */}
       <div
-        className="absolute right-[-5px] top-[24%] h-8 w-[3px] rounded-r
+        className="absolute top-[24%] right-[-5px] h-8 w-[3px] rounded-r
           bg-neutral-600"
       />
       {/* Volume up */}
       <div
-        className="absolute left-[-5px] top-[18%] h-5 w-[3px] rounded-l
+        className="absolute top-[18%] left-[-5px] h-5 w-[3px] rounded-l
           bg-neutral-600"
       />
       {/* Volume down */}
       <div
-        className="absolute left-[-5px] top-[28%] h-5 w-[3px] rounded-l
+        className="absolute top-[28%] left-[-5px] h-5 w-[3px] rounded-l
           bg-neutral-600"
       />
       {/* Screen */}
-      <div
-        className="h-full w-full overflow-hidden rounded-[14px] bg-black"
-      >
+      <div className="h-full w-full overflow-hidden rounded-[14px] bg-black">
         <img
           src={src}
           alt={alt}
@@ -146,8 +157,8 @@ function PhoneFrame({ src, alt }: { src: string; alt: string }) {
         />
         {/* Home indicator */}
         <div
-          className="pointer-events-none absolute bottom-2 left-1/2
-            -translate-x-1/2 h-[3px] w-12 rounded-full bg-white/25"
+          className="pointer-events-none absolute bottom-2 left-1/2 h-[3px] w-12
+            -translate-x-1/2 rounded-full bg-white/25"
         />
       </div>
     </div>
@@ -201,7 +212,10 @@ function WebImageStack({
                 transformOrigin: 'bottom center',
               }}
             >
-              <MacbookFrame src={src} alt={`${title} screenshot ${originalIndex + 1}`} />
+              <MacbookFrame
+                src={src}
+                alt={`${title} screenshot ${originalIndex + 1}`}
+              />
             </div>
           );
         })}
@@ -240,7 +254,7 @@ function WebImageStack({
       {/* Dot indicators */}
       {images.length > 1 && (
         <div
-          className="absolute bottom-2 left-1/2 z-20 flex -translate-x-1/2
+          className="absolute bottom-2 left-1/2 z-[60] flex -translate-x-1/2
             gap-1.5 rounded-full bg-black/50 px-2.5 py-1.5 backdrop-blur-sm"
         >
           {images.map((_, i) => (
@@ -344,7 +358,7 @@ function MobileImageStack({
       {/* Dot indicators */}
       {images.length > 1 && (
         <div
-          className="absolute bottom-2 left-1/2 z-20 flex -translate-x-1/2
+          className="absolute bottom-2 left-1/2 z-[60] flex -translate-x-1/2
             gap-1.5 rounded-full bg-black/50 px-2.5 py-1.5 backdrop-blur-sm"
         >
           {images.map((_, i) => (
@@ -396,18 +410,31 @@ function ProjectCard({ project }: { project: Project }) {
           border-white/10 transition-[overflow] ${
             isOverflow ? 'overflow-visible' : 'overflow-hidden'
           }`}
-        style={{ background: project.cardBg }}
       >
+        {/* Gradient background — always clipped to card shape */}
+        <div
+          className="pointer-events-none absolute inset-0 -z-0 overflow-hidden
+            rounded-3xl"
+        >
+          <img
+            src={project.cardBg}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover"
+            draggable={false}
+          />
+        </div>
+
         <p
-          className="px-6 pt-6 text-base leading-relaxed font-medium
-            text-white/90 md:px-8 md:pt-8 md:text-lg"
+          className="relative z-10 px-6 pt-6 text-base leading-relaxed
+            font-medium text-white/90 md:px-8 md:pt-8 md:text-lg"
         >
           {project.description}
         </p>
 
         {/* Image showcase area */}
         <div
-          className={`relative mt-auto h-52 rounded-b-3xl px-4 pt-6 md:h-64
+          className={`relative z-10 mt-auto h-52 rounded-b-3xl px-4 pt-6 md:h-64
             md:px-6 ${isOverflow ? 'overflow-visible' : 'overflow-hidden'}`}
         >
           {project.imageType === 'mobile' ? (
@@ -447,24 +474,16 @@ export default function ProjectShowcase() {
     <div>
       {/* Section header */}
       <div className="mb-16 text-center">
-        <p
-          className="mb-4 text-sm font-semibold tracking-[0.2em] text-purple-400
-            uppercase"
-        >
-          Portfolio
-        </p>
-        <h2 className="text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-          Featured{' '}
+        <h2 className="text-4xl text-white md:text-5xl lg:text-6xl">
           <span
-            className="bg-gradient-to-r from-purple-400 via-pink-400
-              to-emerald-400 bg-clip-text text-transparent"
+            className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
+              text-transparent"
           >
-            Projects
+            Featured Projects
           </span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-neutral-400">
-          A curated selection of projects that made me confident in building
-          software.
+          A curated selection of my published projects
         </p>
       </div>
 
