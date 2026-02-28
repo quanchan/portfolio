@@ -8,9 +8,11 @@ import ExperienceTimeline from '../components/ExperienceTimeline';
 import TechStackSection from '../components/TechStackSection';
 import SocialLinks from '../components/SocialLinks';
 import CreditsSection from '../components/CreditsSection';
+import NavBar from '../components/NavBar';
 ---
 
 <Layout title="Alan Tran | Software Engineer Portfolio">
+  <NavBar client:load />
   <SocialLinks />
   <main>
     <section
@@ -36,7 +38,7 @@ import CreditsSection from '../components/CreditsSection';
     </section>
 
     <section id="projects" class="section-shell">
-      <ProjectShowcase />
+      <ProjectShowcase client:visible />
     </section>
 
     <section id="tech-stack" class="section-shell">

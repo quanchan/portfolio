@@ -11,7 +11,7 @@ export default function IntroHero() {
       {/* Text content */}
       <div className="text-center md:flex-1 md:text-left">
         <p className="mb-4 text-sm tracking-[0.3em] text-neutral-400 uppercase">
-          Software Engineer Portfolio
+          Full Stack Software Engineer
         </p>
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
@@ -19,6 +19,7 @@ export default function IntroHero() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
           className="max-w-3xl text-5xl leading-tight font-semibold
             tracking-tight text-white md:text-7xl"
+          style={{ fontFamily: '"Lexend Mega", sans-serif' }}
         >
           ALAN TRAN
         </motion.h1>
@@ -26,12 +27,13 @@ export default function IntroHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: 'easeOut' }}
-          className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-300
+          className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-300
             md:text-xl"
         >
-          Full-Stack Software Engineer with 5+ years of experience delivering
-          scalable web applications, developer frameworks, and AI-assisted
-          engineering workflows across enterprise and startup teams.
+          I build software that scales. 5+ years turning complex problems into
+          clean, production-grade systems. <br /> From full stack web frameworks
+          and applications to AI-assisted developer tooling across enterprise
+          and startup environments.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
