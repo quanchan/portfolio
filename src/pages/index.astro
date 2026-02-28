@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import IntroHero from '../components/IntroHero';
+import IntroBackground from '../components/IntroBackground';
+import IntroBackgroundStill from '../components/IntroBackgroundStill';
 import ProjectShowcase from '../components/ProjectShowcase';
 import ExperienceTimeline from '../components/ExperienceTimeline';
 import TechStackSection from '../components/TechStackSection';
@@ -11,8 +13,12 @@ import CreditsSection from '../components/CreditsSection';
 <Layout title="Alan Tran | Software Engineer Portfolio">
 	<SocialLinks />
 	<main>
-		<section id="intro" class="section-shell min-h-screen flex items-center">
-			<IntroHero client:load />
+		<section id="intro" class="relative flex min-h-[100svh] w-full items-center overflow-hidden px-0 py-0">
+			<IntroBackgroundStill client:media="(max-width: 767px)" />
+			<IntroBackground client:media="(min-width: 768px)" />
+			<div class="section-shell relative z-10 py-28 md:py-32">
+				<IntroHero client:load />
+			</div>
 		</section>
 
 		<section id="projects" class="section-shell">
