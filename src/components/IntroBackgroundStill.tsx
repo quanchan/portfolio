@@ -1,9 +1,6 @@
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
-const baseUrl = import.meta.env.BASE_URL.endsWith('/')
-	? import.meta.env.BASE_URL
-	: `${import.meta.env.BASE_URL}/`;
-const animationSrc = `${baseUrl}blob.lottie`;
+const animationSrc = `${import.meta.env.BASE_URL}/assets/blob.lottie`;
 
 export default function IntroBackgroundStill() {
 	return (
