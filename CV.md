@@ -13,6 +13,7 @@ Full-Stack Software Engineer with 5+ years of experience designing, developing, 
 ## Experience
 
 ### Software Engineer | WiseTech Global
+
 **Sydney, AU** · **Aug 2022 – Present**
 
 Mid-level engineer in the Global Logistics On the Web (GLOW) Developer Experience team, enabling web application development for 20+ internal teams.
@@ -30,6 +31,7 @@ Mid-level engineer in the Global Logistics On the Web (GLOW) Developer Experienc
 - Drove AI-enabled engineering adoption in a ~10M+ LOC monolith ecosystem, creating reusable prompts, skill libraries, MCP server integrations, Copilot Spaces, and CLI tooling; improved productivity by 2x across 200+ developers.
 
 ### Technical Founder | Datawise (Startup Project)
+
 **Sydney, AU** · **Mar 2023 – Oct 2023**
 
 - Conceived and led development of a configurable database generation platform for multi-table schemas and complex relational constraints.
@@ -42,6 +44,7 @@ Mid-level engineer in the Global Logistics On the Web (GLOW) Developer Experienc
 - Led a team of 5 engineers and product specialists through planning, reviews, and mentorship.
 
 ### Part-Time Software Engineer | BENIT PTY LTD
+
 **Hanoi, Vietnam** · **Nov 2020 – May 2022**
 
 - Contributed to multiple outsourcing projects across full-stack and cloud environments.
@@ -59,6 +62,7 @@ Mid-level engineer in the Global Logistics On the Web (GLOW) Developer Experienc
 ## Education
 
 ### University of Wollongong
+
 **Bachelor of Computer Science (Big Data and AI Major)** · **Mar 2021 – Dec 2023**
 
 - **WAM:** 90 (HD)
@@ -66,27 +70,33 @@ Mid-level engineer in the Global Logistics On the Web (GLOW) Developer Experienc
 ## Technical Skills
 
 ### Programming Languages
+
 - JavaScript (ES6+), TypeScript, Python, Java, C#
 
 ### JavaScript Ecosystem
+
 - Node.js, React.js, Redux, Vue.js, Next.js, Material UI, Babel, Webpack, Jest, ESLint, Prettier
 
 ### Backend Frameworks
+
 - .NET, Java Spring, NestJS, REST API
 
 ### AI/ML
+
 - LangChain, TensorFlow, PyTorch, Claude Code, GitHub Copilot, VS Code Copilot, MCP server, agent orchestration, prompt engineering
 
 ### Cloud and Infrastructure
+
 - AWS (EC2, S3, Lambda), Docker, Nginx, Linux/Unix, Windows
 
 ### Databases and Caching
+
 - MySQL, PostgreSQL, Oracle, SQL Server, MongoDB, Redis, GraphQL
 
 ### Tools and Automation
+
 - Git, Docker Compose, PowerShell, Bash scripting, CI/CD pipelines
 
 ### Architecture and Principles
+
 - OOP, SOLID, Microservices, Test-Driven Development (TDD), Data Structures and Algorithms, Agile, CI/CD
-
-

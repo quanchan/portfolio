@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "oxlint --config oxlint.json src/"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -20,5 +23,13 @@
     "react-dom": "^19.2.4",
     "react-icons": "^5.5.0",
     "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "oxlint": "^1.50.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-classnames": "^0.9.0",
+    "prettier-plugin-merge": "^0.9.1",
+    "prettier-plugin-tailwindcss": "^0.7.2"
   }
 }

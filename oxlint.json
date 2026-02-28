@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript"],
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "eqeqeq": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-key": "error",
+    "react/no-unknown-property": "error",
+    "typescript/no-explicit-any": "warn"
+  },
+  "ignorePatterns": ["dist/**", "node_modules/**", ".astro/**"]
+}
