@@ -30,6 +30,11 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap" rel="stylesheet" />
   </head>
   <body class="bg-neutral-950 text-neutral-100 antialiased">
+    <script is:inline>
+      // Disable browser scroll restoration and force scroll to top on every load/reload.
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+    </script>
     <slot />
   </body>
 </html>

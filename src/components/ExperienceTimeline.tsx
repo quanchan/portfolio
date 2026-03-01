@@ -51,12 +51,11 @@ export default function ExperienceTimeline() {
 
   return (
     <div>
-      {/* Heading */}
+      {/* Heading — animates on mount (component only hydrates when near viewport) */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         className="mb-16 text-center"
       >
         <h2

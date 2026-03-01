@@ -129,7 +129,6 @@ function MacbookFrame({
             src={src}
             alt={alt}
             className="h-full w-full object-cover object-top"
-            loading="lazy"
             draggable={false}
           />
         </div>
@@ -168,7 +167,6 @@ function PhoneFrame({ src, alt }: { src: string; alt: string }) {
           src={src}
           alt={alt}
           className="h-full w-full object-cover object-top"
-          loading="lazy"
           draggable={false}
         />
         {/* Home indicator */}
@@ -437,7 +435,6 @@ function ProjectCard({ project }: { project: Project }) {
             alt=""
             aria-hidden="true"
             className="h-full w-full object-cover"
-            loading="lazy"
             draggable={false}
           />
         </div>
