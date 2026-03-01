@@ -150,16 +150,23 @@ export default function TechStackSection() {
           Battle-tested technologies powering projects I shipped.
         </motion.p>
         <div className="flex flex-col items-center gap-5">
-          {rows.map((row, ri) => (
-            <div
-              key={ri}
-              className="flex flex-wrap justify-center gap-4 md:gap-5"
-            >
-              {row.map((item) => (
-                <SkillPlaque key={item.name} item={item} />
-              ))}
-            </div>
-          ))}
+          {/* Mobile: flat centered wrap — each partial row auto-centers */}
+          <div className="flex flex-wrap justify-center gap-3 md:hidden">
+            {stackItems.map((item) => (
+              <SkillPlaque key={item.name} item={item} />
+            ))}
+          </div>
+
+          {/* Desktop: reverse-pyramid rows */}
+          <div className="hidden flex-col items-center gap-5 md:flex">
+            {rows.map((row, ri) => (
+              <div key={ri} className="flex flex-wrap justify-center gap-5">
+                {row.map((item) => (
+                  <SkillPlaque key={item.name} item={item} />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
