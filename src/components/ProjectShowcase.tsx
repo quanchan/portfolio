@@ -497,7 +497,7 @@ function CardReveal({
   sectionInView: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const cardInView = useInView(ref, { amount: 1 });
+  const cardInView = useInView(ref, { amount: 0.15 });
   const [hasSeen, setHasSeen] = useState(false);
 
   useEffect(() => {
@@ -533,7 +533,7 @@ export default function ProjectShowcase() {
         className="mb-16 text-center"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
+        viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-4xl text-white md:text-5xl lg:text-6xl">
@@ -548,7 +548,7 @@ export default function ProjectShowcase() {
           className="mx-auto mt-4 max-w-xl text-neutral-400"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           A curated selection of my published projects
