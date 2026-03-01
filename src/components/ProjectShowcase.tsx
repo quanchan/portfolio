@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useCallback, useRef, useEffect } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 
 const base = import.meta.env.BASE_URL;
 const img = (name: string) => `${base}/assets/project_img/${name}`;
@@ -469,11 +469,59 @@ function ProjectCard({ project }: { project: Project }) {
   );
 }
 
-export default function ProjectShowcase() {
+/**
+ * Animates a card in when it is fully in view, and out only when the whole
+ * section has scrolled off (controlled by the parent's sectionInView flag).
+ */
+function CardReveal({
+  children,
+  i,
+  sectionInView,
+}: {
+  children: React.ReactNode;
+  i: number;
+  sectionInView: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const cardInView = useInView(ref, { amount: 1 });
+  const [hasSeen, setHasSeen] = useState(false);
+
+  useEffect(() => {
+    if (cardInView) setHasSeen(true);
+    if (!sectionInView) setHasSeen(false);
+  }, [cardInView, sectionInView]);
+
+  const visible = (cardInView || hasSeen) && sectionInView;
+
   return (
-    <div>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      transition={{
+        duration: 0.5,
+        delay: visible ? (i % 2 === 0 ? 0 : 0.1) : 0,
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default function ProjectShowcase() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionInView = useInView(sectionRef, { amount: 0 });
+
+  return (
+    <div ref={sectionRef}>
       {/* Section header */}
-      <div className="mb-16 text-center">
+      <motion.div
+        className="mb-16 text-center"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.6 }}
+      >
         <h2 className="text-4xl text-white md:text-5xl lg:text-6xl">
           <span
             className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
@@ -482,15 +530,23 @@ export default function ProjectShowcase() {
             Featured Projects
           </span>
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-neutral-400">
+        <motion.p
+          className="mx-auto mt-4 max-w-xl text-neutral-400"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
           A curated selection of my published projects
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
 
       {/* Project grid */}
       <div className="grid gap-10 md:grid-cols-2 lg:gap-14">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
+        {projects.map((project, i) => (
+          <CardReveal key={project.title} i={i} sectionInView={sectionInView}>
+            <ProjectCard project={project} />
+          </CardReveal>
         ))}
       </div>
     </div>
