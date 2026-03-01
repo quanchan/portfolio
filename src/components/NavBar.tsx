@@ -5,7 +5,7 @@ const NAV_ITEMS = [
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#tech-stack' },
-  { label: 'Credits', href: '#credits' },
+  { label: 'Contact', href: '#contact' },
 ] as const;
 
 export default function NavBar() {

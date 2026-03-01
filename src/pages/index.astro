@@ -5,6 +5,7 @@ import IntroBackground from '../components/IntroBackground';
 import ProjectShowcase from '../components/ProjectShowcase';
 import ExperienceTimeline from '../components/ExperienceTimeline';
 import TechStackSection from '../components/TechStackSection';
+import ContactSection from '../components/ContactSection';
 import SocialLinks from '../components/SocialLinks';
 import CreditsSection from '../components/CreditsSection';
 import NavBar from '../components/NavBar';
@@ -41,7 +42,11 @@ import NavBar from '../components/NavBar';
       <TechStackSection client:visible />
     </section>
 
-    <section id="credits" class="section-shell pt-8 pb-16">
+    <section id="contact" class="section-shell">
+      <ContactSection client:visible />
+    </section>
+
+    <section id="credits" class="section-shell pt-0 pb-16">
       <CreditsSection />
     </section>
   </main>
