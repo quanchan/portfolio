@@ -1,5 +1,10 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { AnimatePresence, motion, useInView, type PanInfo } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  type PanInfo,
+} from 'framer-motion';
 
 const base = import.meta.env.BASE_URL;
 const img = (name: string) => `${base}/assets/project_img/${name}`;
@@ -197,7 +202,13 @@ function WebImageStack({
   const navigate = (dir: 1 | -1) => {
     if (images.length <= 1) return;
     setDirection(dir);
-    setFrontIndex((prev) => ((prev + dir) + images.length) % images.length);
+    setFrontIndex((prev) => (prev + dir + images.length) % images.length);
+  };
+
+  const slideVariants = {
+    enter: (d: number) => ({ x: d > 0 ? '60%' : '-60%', opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (d: number) => ({ x: d > 0 ? '-60%' : '60%', opacity: 0 }),
   };
 
   return (
@@ -212,7 +223,11 @@ function WebImageStack({
         style={{ transformOrigin: 'bottom center' }}
         whileHover={
           canHover
-            ? { scale: 1.2, zIndex: 50, transition: { duration: 0.15, ease: 'easeOut' } }
+            ? {
+                scale: 1.2,
+                zIndex: 50,
+                transition: { duration: 0.15, ease: 'easeOut' },
+              }
             : undefined
         }
         onHoverStart={() => canHover && onFrontHoverChange?.(true)}
@@ -232,9 +247,10 @@ function WebImageStack({
               key={frontIndex}
               custom={direction}
               className="absolute inset-0"
-              initial={(d: number) => ({ x: d > 0 ? '60%' : '-60%', opacity: 0 })}
-              animate={{ x: 0, opacity: 1 }}
-              exit={(d: number) => ({ x: d > 0 ? '-60%' : '60%', opacity: 0 })}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{ duration: 0.35, ease: 'easeInOut' }}
             >
               <MacbookFrame src={images[frontIndex]} alt={`${title} preview`} />
@@ -289,7 +305,7 @@ function MobileImageStack({
 
   const navigate = (dir: 1 | -1) => {
     if (images.length <= 1) return;
-    setFrontIndex((prev) => ((prev + dir) + images.length) % images.length);
+    setFrontIndex((prev) => (prev + dir + images.length) % images.length);
   };
 
   return (
@@ -328,11 +344,20 @@ function MobileImageStack({
       <motion.div
         key={frontIndex}
         className="absolute top-1 h-60 w-30 cursor-grab active:cursor-grabbing"
-        style={{ translateX: '-50%', left: '50%', transformOrigin: 'center center' }}
+        style={{
+          translateX: '-50%',
+          left: '50%',
+          transformOrigin: 'center center',
+        }}
         animate={{ zIndex: 10, opacity: 1 }}
         whileHover={
           canHover
-            ? { scale: 1.2, y: -18, zIndex: 50, transition: { duration: 0.15, ease: 'easeOut' } }
+            ? {
+                scale: 1.2,
+                y: -18,
+                zIndex: 50,
+                transition: { duration: 0.15, ease: 'easeOut' },
+              }
             : undefined
         }
         onHoverStart={() => canHover && onFrontHoverChange?.(true)}
@@ -397,9 +422,10 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* Colored card */}
       <div
-        className={`relative flex flex-1 flex-col rounded-3xl border border-white/10 transition-[overflow] ${
-          isOverflow ? 'overflow-visible' : 'overflow-hidden'
-        }`}
+        className={`relative flex flex-1 flex-col rounded-3xl border
+          border-white/10 transition-[overflow] ${
+            isOverflow ? 'overflow-visible' : 'overflow-hidden'
+          }`}
       >
         {/* Gradient background — always clipped to card shape */}
         <div
@@ -425,9 +451,8 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Image showcase area */}
         <div
-          className={`relative z-10 mt-auto h-52 rounded-b-3xl px-4 pt-6 md:h-64 md:px-6 ${
-            isOverflow ? 'overflow-visible' : 'overflow-hidden'
-          }`}
+          className={`relative z-10 mt-auto h-52 rounded-b-3xl px-4 pt-6 md:h-64
+            md:px-6 ${isOverflow ? 'overflow-visible' : 'overflow-hidden'}`}
         >
           {project.imageType === 'mobile' ? (
             <MobileImageStack
