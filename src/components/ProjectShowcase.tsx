@@ -1,9 +1,20 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { AnimatePresence, motion, useInView, type PanInfo } from 'framer-motion';
 
 const base = import.meta.env.BASE_URL;
 const img = (name: string) => `${base}/assets/project_img/${name}`;
 const gradient = (name: string) => `${base}/assets/gradients/${name}`;
+
+/** True only on devices with a fine pointer that supports hover (desktop). */
+function useCanHover() {
+  const [canHover, setCanHover] = useState(false);
+  useEffect(() => {
+    setCanHover(
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    );
+  }, []);
+  return canHover;
+}
 
 type Project = {
   number: string;
@@ -166,8 +177,9 @@ function PhoneFrame({ src, alt }: { src: string; alt: string }) {
 }
 
 /**
- * Fanned stack of browser windows — back images fan out behind
- * the front image. Click the stack to cycle which image is in front.
+ * Sliding carousel for landscape (web) screenshots.
+ * - Images slide in/out from the correct side based on swipe direction.
+ * - Hover zoom is on the outer container so it persists across slides.
  */
 function WebImageStack({
   images,
@@ -179,16 +191,14 @@ function WebImageStack({
   onFrontHoverChange?: (h: boolean) => void;
 }) {
   const [frontIndex, setFrontIndex] = useState(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const canHover = useCanHover();
 
-  const advance = useCallback(() => {
+  const navigate = (dir: 1 | -1) => {
     if (images.length <= 1) return;
-    setFrontIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
-
-  // Build ordered list: front image + the rest as back images
-  const backImages = images
-    .map((src, i) => ({ src, originalIndex: i }))
-    .filter((_, i) => i !== frontIndex);
+    setDirection(dir);
+    setFrontIndex((prev) => ((prev + dir) + images.length) % images.length);
+  };
 
   return (
     <div
@@ -196,62 +206,44 @@ function WebImageStack({
       role="region"
       aria-label={`${title} screenshots`}
     >
-      {/* Back images — always clipped inside their own overflow-hidden wrapper */}
-      <div className="absolute inset-0 overflow-hidden">
-        {backImages.map(({ src, originalIndex }, i) => {
-          const rotation = (i + 1) * (i % 2 === 0 ? 4 : -3);
-          const offsetX = (i + 1) * (i % 2 === 0 ? 6 : -4);
-          const offsetY = (i + 1) * 2;
-          return (
-            <div
-              key={originalIndex}
-              className="absolute inset-0 opacity-50"
-              style={{
-                zIndex: i,
-                transform: `rotate(${rotation}deg) translate(${offsetX}%, ${offsetY}%)`,
-                transformOrigin: 'bottom center',
-              }}
+      {/* Zoom + drag wrapper — dots are intentionally outside so they don't scale */}
+      <motion.div
+        className="absolute inset-0 cursor-grab active:cursor-grabbing"
+        style={{ transformOrigin: 'bottom center' }}
+        whileHover={
+          canHover
+            ? { scale: 1.2, zIndex: 50, transition: { duration: 0.15, ease: 'easeOut' } }
+            : undefined
+        }
+        onHoverStart={() => canHover && onFrontHoverChange?.(true)}
+        onHoverEnd={() => canHover && onFrontHoverChange?.(false)}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.1}
+        onDragEnd={(_: unknown, info: PanInfo) => {
+          if (info.offset.x < -40 || info.velocity.x < -400) navigate(1);
+          else if (info.offset.x > 40 || info.velocity.x > 400) navigate(-1);
+        }}
+      >
+        {/* Slide track — clips images entering/exiting from the sides */}
+        <div className="absolute inset-0 overflow-hidden">
+          <AnimatePresence initial={false} custom={direction} mode="popLayout">
+            <motion.div
+              key={frontIndex}
+              custom={direction}
+              className="absolute inset-0"
+              initial={(d: number) => ({ x: d > 0 ? '60%' : '-60%', opacity: 0 })}
+              animate={{ x: 0, opacity: 1 }}
+              exit={(d: number) => ({ x: d > 0 ? '-60%' : '60%', opacity: 0 })}
+              transition={{ duration: 0.35, ease: 'easeInOut' }}
             >
-              <MacbookFrame
-                src={src}
-                alt={`${title} screenshot ${originalIndex + 1}`}
-              />
-            </div>
-          );
-        })}
-      </div>
+              <MacbookFrame src={images[frontIndex]} alt={`${title} preview`} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </motion.div>
 
-      {/* Front image (clickable, scales on hover) */}
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          key={frontIndex}
-          className="absolute inset-0"
-          onClick={advance}
-          onHoverStart={() => onFrontHoverChange?.(true)}
-          onHoverEnd={() => onFrontHoverChange?.(false)}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          whileHover={{
-            scale: 1.2,
-            zIndex: 50,
-            transition: { duration: 0.05, ease: 'easeOut' },
-          }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          style={{
-            zIndex: backImages.length,
-            transformOrigin: 'bottom center',
-          }}
-        >
-          <MacbookFrame
-            src={images[frontIndex]}
-            alt={`${title} preview`}
-            className={images.length > 1 ? 'cursor-pointer' : ''}
-          />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Dot indicators */}
+      {/* Dot indicators — outside the zoom wrapper, always stay in place */}
       {images.length > 1 && (
         <div
           className="absolute bottom-2 left-1/2 z-[60] flex -translate-x-1/2
@@ -261,8 +253,8 @@ function WebImageStack({
             <button
               type="button"
               key={i}
-              onClick={(e) => {
-                e.stopPropagation();
+              onClick={() => {
+                setDirection(i > frontIndex ? 1 : -1);
                 setFrontIndex(i);
               }}
               aria-label={`Go to screenshot ${i + 1}`}
@@ -280,8 +272,8 @@ function WebImageStack({
 }
 
 /**
- * Phone screens anchored to the bottom-center. The front image is always
- * centered; others fan out to the sides. Click to cycle the front image.
+ * Phone screens — swipe horizontally (or use dots) to cycle. Front is
+ * centered; others fan out to the sides.
  */
 function MobileImageStack({
   images,
@@ -293,11 +285,12 @@ function MobileImageStack({
   onFrontHoverChange?: (h: boolean) => void;
 }) {
   const [frontIndex, setFrontIndex] = useState(0);
+  const canHover = useCanHover();
 
-  const advance = useCallback(() => {
+  const navigate = (dir: 1 | -1) => {
     if (images.length <= 1) return;
-    setFrontIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
+    setFrontIndex((prev) => ((prev + dir) + images.length) % images.length);
+  };
 
   return (
     <div
@@ -305,7 +298,7 @@ function MobileImageStack({
       role="region"
       aria-label={`${title} screenshots`}
     >
-      {/* Back images — always clipped inside their own overflow-hidden wrapper */}
+      {/* Back images */}
       <div className="absolute inset-0 overflow-hidden">
         {images.map((src, i) => {
           if (i === frontIndex) return null;
@@ -324,7 +317,6 @@ function MobileImageStack({
                 zIndex: 5 - Math.abs(offset),
               }}
               transition={{ duration: 0.35, ease: 'easeInOut' }}
-              onClick={advance}
             >
               <PhoneFrame src={src} alt={`${title} screenshot ${i + 1}`} />
             </motion.div>
@@ -332,25 +324,27 @@ function MobileImageStack({
         })}
       </div>
 
-      {/* Front image — sibling outside the clipping wrapper, can overflow when card allows */}
+      {/* Front image — drag to swipe; hover-zooms on desktop only */}
       <motion.div
         key={frontIndex}
-        className="absolute top-1 h-60 w-30"
-        style={{
-          translateX: '-50%',
-          left: '50%',
-          transformOrigin: 'top center',
-        }}
+        className="absolute top-1 h-60 w-30 cursor-grab active:cursor-grabbing"
+        style={{ translateX: '-50%', left: '50%', transformOrigin: 'center center' }}
         animate={{ zIndex: 10, opacity: 1 }}
-        whileHover={{
-          scale: 1.2,
-          zIndex: 50,
-          transition: { duration: 0.12, ease: 'easeOut' },
+        whileHover={
+          canHover
+            ? { scale: 1.2, y: -18, zIndex: 50, transition: { duration: 0.15, ease: 'easeOut' } }
+            : undefined
+        }
+        onHoverStart={() => canHover && onFrontHoverChange?.(true)}
+        onHoverEnd={() => canHover && onFrontHoverChange?.(false)}
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.1}
+        onDragEnd={(_: unknown, info: PanInfo) => {
+          if (info.offset.x < -40 || info.velocity.x < -400) navigate(1);
+          else if (info.offset.x > 40 || info.velocity.x > 400) navigate(-1);
         }}
-        onHoverStart={() => onFrontHoverChange?.(true)}
-        onHoverEnd={() => onFrontHoverChange?.(false)}
         transition={{ duration: 0.35, ease: 'easeInOut' }}
-        onClick={advance}
       >
         <PhoneFrame src={images[frontIndex]} alt={`${title} preview`} />
       </motion.div>
@@ -365,10 +359,7 @@ function MobileImageStack({
             <button
               type="button"
               key={i}
-              onClick={(e) => {
-                e.stopPropagation();
-                setFrontIndex(i);
-              }}
+              onClick={() => setFrontIndex(i)}
               aria-label={`Go to screenshot ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === frontIndex
@@ -383,7 +374,7 @@ function MobileImageStack({
   );
 }
 
-/** Per-card wrapper — owns the overflow state so only the front image breaks out. */
+/** Per-card wrapper */
 function ProjectCard({ project }: { project: Project }) {
   const [isOverflow, setIsOverflow] = useState(false);
 
@@ -406,10 +397,9 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* Colored card */}
       <div
-        className={`relative flex flex-1 flex-col rounded-3xl border
-          border-white/10 transition-[overflow] ${
-            isOverflow ? 'overflow-visible' : 'overflow-hidden'
-          }`}
+        className={`relative flex flex-1 flex-col rounded-3xl border border-white/10 transition-[overflow] ${
+          isOverflow ? 'overflow-visible' : 'overflow-hidden'
+        }`}
       >
         {/* Gradient background — always clipped to card shape */}
         <div
@@ -421,6 +411,7 @@ function ProjectCard({ project }: { project: Project }) {
             alt=""
             aria-hidden="true"
             className="h-full w-full object-cover"
+            loading="lazy"
             draggable={false}
           />
         </div>
@@ -434,8 +425,9 @@ function ProjectCard({ project }: { project: Project }) {
 
         {/* Image showcase area */}
         <div
-          className={`relative z-10 mt-auto h-52 rounded-b-3xl px-4 pt-6 md:h-64
-            md:px-6 ${isOverflow ? 'overflow-visible' : 'overflow-hidden'}`}
+          className={`relative z-10 mt-auto h-52 rounded-b-3xl px-4 pt-6 md:h-64 md:px-6 ${
+            isOverflow ? 'overflow-visible' : 'overflow-hidden'
+          }`}
         >
           {project.imageType === 'mobile' ? (
             <MobileImageStack

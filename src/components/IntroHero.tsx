@@ -75,6 +75,7 @@ export default function IntroHero() {
           alt="Alan Tran"
           width={176}
           height={176}
+          fetchPriority="high"
           className="relative block h-36 w-36 rounded-full object-cover
             brightness-95 md:h-44 md:w-44"
         />
