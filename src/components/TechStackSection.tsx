@@ -85,9 +85,8 @@ function SkillPlaque({ item }: { item: StackItem }) {
         alt={item.name}
         width={32}
         height={32}
-        className="h-8 w-8 grayscale transition-all duration-300
-          group-hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.5)]
-          group-hover:grayscale-0"
+        className="h-8 w-8 transition-all duration-300
+          group-hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.5)]"
         loading="lazy"
       />
       <span
