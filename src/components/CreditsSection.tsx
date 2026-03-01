@@ -5,7 +5,9 @@ export default function CreditsSection() {
         Designed &amp; developed by{' '}
         <span className="text-neutral-300">Alan Tran</span>
       </p>
-      <p className="mt-2 text-xs text-neutral-600">© 2026 · All rights reserved</p>
+      <p className="mt-2 text-xs text-neutral-600">
+        © 2026 · All rights reserved
+      </p>
     </footer>
   );
 }

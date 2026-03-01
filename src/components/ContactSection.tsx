@@ -52,9 +52,7 @@ export default function ContactSection() {
 
   function handleSend(e: React.FormEvent) {
     e.preventDefault();
-    const body = encodeURIComponent(
-      `Hi Alan,\n\n${message}\n\n— ${name}`,
-    );
+    const body = encodeURIComponent(`Hi Alan,\n\n${message}\n\n— ${name}`);
     const sub = encodeURIComponent(subject || '(No subject)');
     window.location.href = `mailto:quan.trananh12@gmail.com?subject=${sub}&body=${body}`;
   }
@@ -69,7 +67,10 @@ export default function ContactSection() {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-4xl text-white md:text-5xl lg:text-6xl">
-          <span className="bg-gradient-to-b from-white to-purple-600 bg-clip-text text-transparent">
+          <span
+            className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
+              text-transparent"
+          >
             Get In Touch
           </span>
         </h2>
@@ -79,7 +80,8 @@ export default function ContactSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          Open to new opportunities, collaborations, or just a good conversation.
+          Open to new opportunities, collaborations, or just a good
+          conversation.
         </motion.p>
       </motion.div>
 
@@ -100,18 +102,20 @@ export default function ContactSection() {
                 <a
                   href={item.href}
                   target={item.href.startsWith('http') ? '_blank' : undefined}
-                  rel={
-                    item.href.startsWith('http') ? 'noreferrer' : undefined
-                  }
+                  rel={item.href.startsWith('http') ? 'noreferrer' : undefined}
                   className="group flex items-center gap-4 rounded-xl border
                     border-white/10 bg-white/5 px-5 py-4 backdrop-blur-md
                     transition-all duration-300 hover:border-purple-400/60
-                    hover:bg-white/10 hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
+                    hover:bg-white/10
+                    hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
                 >
                   <item.icon className="h-5 w-5 shrink-0 text-purple-400" />
                   <div className="min-w-0">
                     <p className="text-xs text-neutral-500">{item.label}</p>
-                    <p className="truncate text-sm text-neutral-200 transition-colors group-hover:text-white">
+                    <p
+                      className="truncate text-sm text-neutral-200
+                        transition-colors group-hover:text-white"
+                    >
                       {item.value}
                     </p>
                   </div>
@@ -157,9 +161,10 @@ export default function ContactSection() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="John Smith"
-              className="rounded-lg border border-white/10 bg-white/5 px-4 py-2.5
-                text-sm text-white placeholder-neutral-600 outline-none
-                transition-colors focus:border-purple-500/60 focus:bg-white/10"
+              className="rounded-lg border border-white/10 bg-white/5 px-4
+                py-2.5 text-sm text-white placeholder-neutral-600
+                transition-colors outline-none focus:border-purple-500/60
+                focus:bg-white/10"
             />
           </div>
 
@@ -176,9 +181,10 @@ export default function ContactSection() {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               placeholder="Opportunity / Collaboration / Hello"
-              className="rounded-lg border border-white/10 bg-white/5 px-4 py-2.5
-                text-sm text-white placeholder-neutral-600 outline-none
-                transition-colors focus:border-purple-500/60 focus:bg-white/10"
+              className="rounded-lg border border-white/10 bg-white/5 px-4
+                py-2.5 text-sm text-white placeholder-neutral-600
+                transition-colors outline-none focus:border-purple-500/60
+                focus:bg-white/10"
             />
           </div>
 
@@ -196,9 +202,10 @@ export default function ContactSection() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="What's on your mind?"
-              className="resize-none rounded-lg border border-white/10 bg-white/5
-                px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none
-                transition-colors focus:border-purple-500/60 focus:bg-white/10"
+              className="resize-none rounded-lg border border-white/10
+                bg-white/5 px-4 py-2.5 text-sm text-white
+                placeholder-neutral-600 transition-colors outline-none
+                focus:border-purple-500/60 focus:bg-white/10"
             />
           </div>
 
