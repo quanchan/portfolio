@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import IntroHero from '../components/IntroHero';
 import IntroBackground from '../components/IntroBackground';
-import IntroBackgroundStill from '../components/IntroBackgroundStill';
 import ProjectShowcase from '../components/ProjectShowcase';
 import ExperienceTimeline from '../components/ExperienceTimeline';
 import TechStackSection from '../components/TechStackSection';
@@ -20,11 +19,8 @@ import NavBar from '../components/NavBar';
       class="relative flex min-h-[100svh] w-full items-center overflow-hidden
         px-0 py-0"
     >
-      <div class="absolute inset-0 md:hidden">
-        <IntroBackgroundStill client:media="(max-width: 767px)" />
-      </div>
-      <div class="absolute inset-0 hidden md:block">
-        <IntroBackground client:media="(min-width: 768px)" />
+      <div class="absolute inset-0">
+        <IntroBackground client:load />
       </div>
       <div class="section-shell relative z-10 py-28 md:py-32">
         <IntroHero
