@@ -12,7 +12,7 @@ const links = [
     download: undefined,
   },
   {
-    href: 'https://www.linkedin.com/in/alan-tran-165192237',
+    href: 'https://www.linkedin.com/in/anhquantran12',
     label: 'LinkedIn',
     icon: FaLinkedinIn,
     text: undefined,

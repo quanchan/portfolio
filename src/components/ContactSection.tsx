@@ -25,8 +25,8 @@ const contactDetails = [
   {
     icon: FaLinkedinIn,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/alan-tran-165192237',
-    href: 'https://www.linkedin.com/in/alan-tran-165192237',
+    value: 'linkedin.com/in/anhquantran12',
+    href: 'https://www.linkedin.com/in/anhquantran12',
   },
   {
     icon: FaGithub,

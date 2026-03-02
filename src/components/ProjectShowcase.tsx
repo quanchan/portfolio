@@ -1,10 +1,5 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  type PanInfo,
-} from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { AnimatePresence, motion, type PanInfo } from 'framer-motion';
 
 const base = import.meta.env.BASE_URL;
 const img = (name: string) => `${base}/assets/project_img/${name}`;
@@ -487,38 +482,18 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 /**
- * Animates a card in when it is fully in view, and out only when the whole
- * section has scrolled off (controlled by the parent's sectionInView flag).
+ * Animates a card in once when it enters the viewport.
  */
-function CardReveal({
-  children,
-  i,
-  sectionInView,
-}: {
-  children: React.ReactNode;
-  i: number;
-  sectionInView: boolean;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const cardInView = useInView(ref, { amount: 0.15 });
-  const [hasSeen, setHasSeen] = useState(false);
-
-  useEffect(() => {
-    if (cardInView) setHasSeen(true);
-    if (!sectionInView) setHasSeen(false);
-  }, [cardInView, sectionInView]);
-
-  const visible = (cardInView || hasSeen) && sectionInView;
-
+function CardReveal({ children, i }: { children: React.ReactNode; i: number }) {
   return (
     <motion.div
-      ref={ref}
       className="h-full"
       initial={{ opacity: 0, y: 24 }}
-      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
       transition={{
         duration: 0.5,
-        delay: visible ? Math.floor(i / 2) * 0.15 : 0,
+        delay: Math.floor(i / 2) * 0.15,
       }}
     >
       {children}
@@ -527,9 +502,6 @@ function CardReveal({
 }
 
 export default function ProjectShowcase() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const sectionInView = useInView(sectionRef, { amount: 0 });
-
   return (
     <>
       {/* Section header */}
@@ -554,9 +526,9 @@ export default function ProjectShowcase() {
       </motion.div>
 
       {/* Project grid */}
-      <div ref={sectionRef} className="grid gap-10 md:grid-cols-2 lg:gap-14">
+      <div className="grid gap-10 md:grid-cols-2 lg:gap-14">
         {projects.map((project, i) => (
-          <CardReveal key={project.title} i={i} sectionInView={sectionInView}>
+          <CardReveal key={project.title} i={i}>
             <ProjectCard project={project} />
           </CardReveal>
         ))}
