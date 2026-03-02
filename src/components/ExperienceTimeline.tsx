@@ -123,7 +123,7 @@ const experiences: {
   },
 ];
 
-const fadeViewport = { once: false, margin: '0px 0px -12% 0px' };
+const fadeViewport = { once: true, margin: '0px 0px -8% 0px' };
 
 export default function ExperienceTimeline() {
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -146,7 +146,8 @@ export default function ExperienceTimeline() {
       {/* Heading — animates on mount (component only hydrates when near viewport) */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.5 }}
         className="mb-16 text-center"
       >
