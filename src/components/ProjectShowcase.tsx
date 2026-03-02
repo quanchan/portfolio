@@ -490,7 +490,7 @@ function CardReveal({ children, i }: { children: React.ReactNode; i: number }) {
       className="h-full"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.1 }}
       transition={{
         duration: 0.5,
         delay: Math.floor(i / 2) * 0.15,
@@ -509,7 +509,7 @@ export default function ProjectShowcase() {
         className="mb-16 text-center"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
+        viewport={{ once: false, amount: 0.15 }}
         transition={{ duration: 0.6 }}
       >
         <h2 className="section-title">Featured Projects</h2>
@@ -517,7 +517,7 @@ export default function ProjectShowcase() {
           className="mx-auto mt-4 text-neutral-400"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
           Personal projects showcasing ideas and experiments outside my
