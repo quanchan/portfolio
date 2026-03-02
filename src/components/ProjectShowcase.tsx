@@ -527,7 +527,7 @@ export default function ProjectShowcase() {
   const sectionInView = useInView(sectionRef, { amount: 0 });
 
   return (
-    <div ref={sectionRef}>
+    <>
       {/* Section header */}
       <motion.div
         className="mb-16 text-center"
@@ -536,14 +536,7 @@ export default function ProjectShowcase() {
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl text-white md:text-5xl lg:text-6xl">
-          <span
-            className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
-              text-transparent"
-          >
-            Featured Projects
-          </span>
-        </h2>
+        <h2 className="section-title">Featured Projects</h2>
         <motion.p
           className="mx-auto mt-4 max-w-xl text-neutral-400"
           initial={{ opacity: 0, y: 20 }}
@@ -556,13 +549,13 @@ export default function ProjectShowcase() {
       </motion.div>
 
       {/* Project grid */}
-      <div className="grid gap-10 md:grid-cols-2 lg:gap-14">
+      <div ref={sectionRef} className="grid gap-10 md:grid-cols-2 lg:gap-14">
         {projects.map((project, i) => (
           <CardReveal key={project.title} i={i} sectionInView={sectionInView}>
             <ProjectCard project={project} />
           </CardReveal>
         ))}
       </div>
-    </div>
+    </>
   );
 }

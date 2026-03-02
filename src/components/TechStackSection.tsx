@@ -125,21 +125,8 @@ export default function TechStackSection() {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Content — re-constrained to match rest of page */}
-      <div
-        className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 md:px-10
-          md:py-24"
-      >
-        <h2
-          className="mb-4 text-center text-5xl text-white md:text-6xl
-            lg:text-6xl"
-        >
-          <span
-            className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
-              text-transparent"
-          >
-            The Tech Forge
-          </span>
-        </h2>
+      <div className="section-shell relative z-10">
+        <h2 className="section-title mb-4 text-center">The Tech Forge</h2>
         <motion.p
           className="mx-auto mb-14 max-w-xl text-center text-neutral-400"
           initial={{ opacity: 0, y: 20 }}

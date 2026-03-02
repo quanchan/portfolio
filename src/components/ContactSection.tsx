@@ -58,7 +58,7 @@ export default function ContactSection() {
   }
 
   return (
-    <div>
+    <>
       {/* Heading */}
       <motion.div
         className="mb-14 text-center"
@@ -66,14 +66,7 @@ export default function ContactSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-5xl text-white md:text-6xl">
-          <span
-            className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
-              text-transparent"
-          >
-            Get In Touch
-          </span>
-        </h2>
+        <h2 className="section-title">Get In Touch</h2>
         <motion.p
           className="mx-auto mt-4 max-w-xl text-neutral-400"
           initial={{ opacity: 0, y: 20 }}
@@ -224,6 +217,6 @@ export default function ContactSection() {
           </p>
         </motion.form>
       </div>
-    </div>
+    </>
   );
 }
