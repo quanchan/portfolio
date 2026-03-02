@@ -66,7 +66,7 @@ export default function ContactSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="section-title">Get In Touch</h2>
+        <h2 className="section-title">Contact Me</h2>
         <motion.p
           className="mx-auto mt-4 max-w-xl text-neutral-400"
           initial={{ opacity: 0, y: 20 }}

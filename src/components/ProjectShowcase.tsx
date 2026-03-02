@@ -38,15 +38,14 @@ const projects: Project[] = [
     category: 'WEB APP',
     title: 'PTE Magic',
     description:
-      'Full-featured web application for students to practice for the ' +
-      'PTE test with microservice architecture and robust data persistence.',
+      'An AI-powered PTE exam preparation platform that helps learners practice real-exam questions, take full-length mock tests with instant feedback or learn from courses.',
     images: [
       img('ptemagic1.avif'),
       img('ptemagic2.avif'),
       img('ptemagic3.avif'),
     ],
     imageType: 'web',
-    tech: ['Next.js', 'Java', 'Spring Boot', 'PostgreSQL'],
+    tech: ['TypeScript', 'Next.js', 'React', 'Java Spring', 'PostgreSQL'],
     cardBg: gradient('gradient3.avif'),
   },
   {
@@ -54,25 +53,29 @@ const projects: Project[] = [
     category: 'WEB APP',
     title: 'Datawise',
     description:
-      'Configurable database generation platform supporting ' +
-      'multi-table schemas, 60+ data types, and relational constraints ' +
-      'with cross-vendor SQL output.',
+      'A configurable database generation platform that creates realistic, multi-table test datasets with relational constraints, supporting MySQL, Oracle, and PostgreSQL.',
     images: [
       img('datawise1.avif'),
       img('datawise2.avif'),
       img('datawise3.avif'),
     ],
     imageType: 'web',
-    tech: ['Next.js', 'Chakra UI', 'PostgreSQL', 'Docker'],
+    tech: [
+      'TypeScript',
+      'React',
+      'Next.js',
+      'Chakra UI',
+      'PostgreSQL',
+      'Docker',
+    ],
     cardBg: gradient('gradient1.avif'),
   },
   {
     number: '03',
     category: 'WEB APP',
-    title: 'Valentine',
+    title: 'Valentine Gift',
     description:
-      "Interactive Valentine's Day web experience " +
-      'with animations and personalized messages.',
+      'A galaxy-themed romantic web experience with polished visuals, smooth animations, and delightful interactive elements.',
     images: [
       img('valentine1.avif'),
       img('valentine2.avif'),
@@ -87,15 +90,14 @@ const projects: Project[] = [
     category: 'MOBILE APP',
     title: 'TodoRPG',
     description:
-      'Full-stack mobile app with cloud server ' +
-      'that gamifies personal development and task management.',
+      'An RPG adventure that turns your daily tasks into quests, making productivity and personal growth fun and addictive.',
     images: [
       img('todo-rpg1.avif'),
       img('todo-rpg2.avif'),
       img('todo-rpg3.avif'),
     ],
     imageType: 'mobile',
-    tech: ['React Native', 'Expo', 'Java', 'Spring Boot'],
+    tech: ['PhaserJS', 'TypeScript'],
     cardBg: gradient('gradient2.avif'),
   },
 ];
@@ -402,7 +404,7 @@ function ProjectCard({ project }: { project: Project }) {
   const [isOverflow, setIsOverflow] = useState(false);
 
   return (
-    <article className="flex flex-col">
+    <article className="flex h-full flex-col">
       {/* Number + Category */}
       <div
         className="mb-3 flex items-center gap-3 text-xs tracking-[0.15em]
@@ -440,8 +442,9 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <p
-          className="relative z-10 px-6 pt-6 text-base leading-relaxed
-            font-medium text-white/90 md:px-8 md:pt-8 md:text-lg"
+          className="relative z-10 line-clamp-3 h-[4.875rem] px-6 pt-6 text-base
+            leading-relaxed font-medium text-white/90 md:h-[5.5rem] md:px-8
+            md:pt-8 md:text-lg"
         >
           {project.description}
         </p>
@@ -510,11 +513,12 @@ function CardReveal({
   return (
     <motion.div
       ref={ref}
+      className="h-full"
       initial={{ opacity: 0, y: 24 }}
       animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
       transition={{
         duration: 0.5,
-        delay: visible ? (i % 2 === 0 ? 0 : 0.1) : 0,
+        delay: visible ? Math.floor(i / 2) * 0.15 : 0,
       }}
     >
       {children}
@@ -538,13 +542,14 @@ export default function ProjectShowcase() {
       >
         <h2 className="section-title">Featured Projects</h2>
         <motion.p
-          className="mx-auto mt-4 max-w-xl text-neutral-400"
+          className="mx-auto mt-4 text-neutral-400"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          A curated selection of my published projects
+          Personal projects showcasing ideas and experiments outside my
+          commercial work.
         </motion.p>
       </motion.div>
 
