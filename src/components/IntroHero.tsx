@@ -30,10 +30,10 @@ export default function IntroHero() {
           className="mt-6 max-w-xl text-lg leading-relaxed text-neutral-300
             md:text-xl"
         >
-          I build software that scales. 5+ years turning complex problems into
-          clean, production-grade systems. <br /> From full stack web frameworks
-          and applications to AI-assisted developer tooling across enterprise
-          and startup environments.
+          5+ years. Enterprise scale. Real impact. I design full-stack systems,
+          lead engineering teams, and build AI tooling that ships faster and
+          breaks less. 2x developer productivity. 30% fewer runtime errors.
+          Zero-regression framework overhauls.
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
@@ -46,7 +46,7 @@ export default function IntroHero() {
             className="rounded-full bg-white px-6 py-3 text-sm font-medium
               text-neutral-900 transition hover:bg-neutral-200"
           >
-            My Experience
+            Explore My Experience →
           </a>
           <a
             href="#projects"
