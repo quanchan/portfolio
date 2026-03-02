@@ -33,7 +33,7 @@ const projects: Project[] = [
     category: 'WEB APP',
     title: 'PTE Magic',
     description:
-      'An AI-powered PTE exam preparation platform that helps learners practice real-exam questions, take full-length mock tests with instant feedback or learn from courses.',
+      'An AI-powered PTE exam preparation platform that helps learners practice real-exam questions and take full-length mock tests with instant feedback.',
     images: [
       img('ptemagic1.avif'),
       img('ptemagic2.avif'),
@@ -437,9 +437,9 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         <p
-          className="relative z-10 line-clamp-3 h-[4.875rem] px-6 pt-6 text-base
-            leading-relaxed font-medium text-white/90 md:h-[5.5rem] md:px-8
-            md:pt-8 md:text-lg"
+          className="relative z-10 px-6 pt-6 text-base leading-relaxed
+            font-medium text-white/90 sm:h-[8rem] md:h-[12rem] md:px-8 md:pt-8
+            md:text-lg xl:h-[7rem]"
         >
           {project.description}
         </p>
