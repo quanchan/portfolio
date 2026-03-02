@@ -130,7 +130,7 @@ export default function TechStackSection() {
           md:py-24"
       >
         <h2
-          className="mb-4 text-center text-4xl text-white md:text-5xl
+          className="mb-4 text-center text-5xl text-white md:text-6xl
             lg:text-6xl"
         >
           <span

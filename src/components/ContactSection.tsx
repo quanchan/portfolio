@@ -66,7 +66,7 @@ export default function ContactSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl text-white md:text-5xl lg:text-6xl">
+        <h2 className="text-5xl text-white md:text-6xl">
           <span
             className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
               text-transparent"
