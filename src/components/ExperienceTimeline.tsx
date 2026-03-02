@@ -1,14 +1,63 @@
 import { useRef } from 'react';
+import type React from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
-const experiences = [
+const experiences: {
+  from: string;
+  to: string;
+  role: string;
+  company: string;
+  type: string;
+  description: React.ReactNode;
+}[] = [
   {
     from: 'Aug 2022',
     to: 'Present',
     role: 'Software Engineer',
     company: 'WiseTech Global',
     type: 'Full-Time',
-    description: `I joined Glow Developer Experience team with one mission: make it easier for 20+ product teams to build better software, faster. Over time, that evolved into something I didn't expect — becoming one of the earliest internal voices pushing for AI-assisted engineering. I built agent orchestration workflows, MCP servers, and Copilot tooling that ultimately 2x'd productivity for 200+ developers across a 10M+ line codebase. Beyond the AI work, I re-architected core framework engines, led TypeScript migrations that cut runtime errors by 30%, and mentored engineers through some genuinely complex, domain-heavy problems. What I'm most proud of? Owning hard problems end-to-end — from the first line of investigation to the last line of production code.`,
+    description: (
+      <>
+        <p>
+          I joined the Glow Developer Experience team with one mission: make it
+          easier for{' '}
+          <strong className="text-neutral-200">20+ product teams</strong> to
+          build better software, faster.
+        </p>
+        <p>
+          Over time, that evolved into becoming one of the internal voices
+          pushing for{' '}
+          <strong className="text-neutral-200">AI-assisted engineering</strong>{' '}
+          , building agent orchestration workflows, MCP servers, and Copilot
+          tooling that contributes to{' '}
+          <strong className="text-neutral-200">
+            2x productivity for 200+ developers
+          </strong>{' '}
+          across a{' '}
+          <strong className="text-neutral-200">10M+ line codebase</strong>.
+        </p>
+        <p>
+          Beyond the AI work, I re-architected core framework engines, led{' '}
+          <strong className="text-neutral-200">
+            TypeScript migrations that cut runtime errors by 30%
+          </strong>
+          , and{' '}
+          <strong className="text-neutral-200">
+            enhanced enterprise end-to-end JavaScript ecosystems
+          </strong>{' '}
+          spanning tooling, build infrastructure, test frameworks, and runtime
+          environments.
+        </p>
+        <p>
+          What I'm most proud of?{' '}
+          <strong className="text-neutral-200">
+            Owning hard problems end-to-end
+          </strong>{' '}
+          , from the first question asked to the last line of production code,
+          and remaining accountable for their stability long after they ship.
+        </p>
+      </>
+    ),
   },
   {
     from: 'Mar 2023',
@@ -16,8 +65,33 @@ const experiences = [
     role: 'Technical Founder',
     company: 'Datawise',
     type: 'Startup',
-    description:
-      'Conceived and built a configurable database generation platform supporting multi-table schemas and complex relational constraints. Designed the full stack with Next.js, React, and Chakra UI; modelled 60+ PostgreSQL data types; built extensible SQL adapters for MySQL, Oracle, and PostgreSQL; enforced relational integrity via custom parsers; and containerised the app with Docker Compose. Led a team of 5 across planning, reviews, and delivery.',
+    description: (
+      <>
+        <p>
+          Datawise started as a question: why is generating realistic test data
+          still so painful? So I built the answer, a{' '}
+          <strong className="text-neutral-200">
+            configurable database generation platform
+          </strong>{' '}
+          from scratch, modelling{' '}
+          <strong className="text-neutral-200">60+ data types</strong> and
+          building vendor-specific SQL adapters for{' '}
+          <strong className="text-neutral-200">
+            MySQL, Oracle, and PostgreSQL
+          </strong>
+          .
+        </p>
+        <p>
+          Running a startup while working full-time taught me a different kind
+          of discipline, making sharp technical trade-offs with limited time,
+          keeping a team aligned, and{' '}
+          <strong className="text-neutral-200">
+            directly creating tangible business impact
+          </strong>
+          .
+        </p>
+      </>
+    ),
   },
   {
     from: 'Nov 2020',
@@ -25,8 +99,27 @@ const experiences = [
     role: 'Part-Time Software Engineer',
     company: 'BENIT PTY LTD',
     type: 'Part-Time',
-    description:
-      'Delivered full-stack outsourcing projects using React, Next.js, and React Native. Refactored 50+ components from JavaScript to TypeScript, designed auth/authorisation services, and maintained Java Spring, NestJS, and Express microservices. Optimised PostgreSQL systems by ~35%, designed MongoDB schemas across 10+ domains, managed 20+ AWS EC2 instances, and integrated third-party APIs including Google Ads, payment gateways, and Amazon S3.',
+    description: (
+      <>
+        <p>
+          This is where I grew up as an engineer. Across a range of outsourcing
+          projects,{' '}
+          <strong className="text-neutral-200">
+            I touched almost every layer of the stack{' '}
+          </strong>{' '}
+          , React frontends, Java Spring and NestJS microservices, PostgreSQL
+          optimisations that boosted performance by 35% , AWS infrastructure,
+          and CI/CD pipelines.
+        </p>
+        <p>
+          I also got my first taste of{' '}
+          <strong className="text-neutral-200">technical leadership</strong>,
+          mentoring junior developers and learning how to bring people along,
+          not just write good code. It was fast-paced, broad, and exactly the
+          foundation I needed.
+        </p>
+      </>
+    ),
   },
 ];
 
@@ -49,7 +142,7 @@ export default function ExperienceTimeline() {
   const dotY = useTransform(rawHeight, [0, 1], ['0%', '100%']);
 
   return (
-    <div>
+    <>
       {/* Heading — animates on mount (component only hydrates when near viewport) */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -57,10 +150,7 @@ export default function ExperienceTimeline() {
         transition={{ duration: 0.5 }}
         className="mb-16 text-center"
       >
-        <h2
-          className="bg-gradient-to-b from-white to-purple-600 bg-clip-text
-            text-5xl leading-[1.1] tracking-tight text-transparent md:text-6xl"
-        >
+        <h2 className="section-title">
           My career &amp;
           <br />
           experience
@@ -109,7 +199,7 @@ export default function ExperienceTimeline() {
     children become direct grid columns 1 and 2. */}
             <div className="flex items-start justify-between md:contents">
               {/* Col 1 - role + company */}
-              <div className="flex-1 md:pr-16">
+              <div className="flex-1 md:pr-8 md:pl-16">
                 <h3
                   className="text-xl leading-snug font-semibold text-white
                     md:text-2xl"
@@ -146,17 +236,15 @@ export default function ExperienceTimeline() {
             </div>
 
             {/* Col 3 - description (full-width on mobile, right col on desktop) */}
-            <div className="mt-3 md:mt-0 md:pl-16">
-              <p
-                className="text-sm leading-relaxed text-neutral-400
-                  md:text-base"
-              >
-                {item.description}
-              </p>
+            <div
+              className="mt-3 flex flex-col gap-3 text-sm leading-relaxed
+                text-neutral-400 md:mt-0 md:pl-8 md:text-base"
+            >
+              {item.description}
             </div>
           </motion.div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
