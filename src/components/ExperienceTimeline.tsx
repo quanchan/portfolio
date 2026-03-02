@@ -8,8 +8,7 @@ const experiences = [
     role: 'Software Engineer',
     company: 'WiseTech Global',
     type: 'Full-Time',
-    description:
-      'High impact mid-level engineer on the Developer Experience team, enabling web development across 20+ internal teams. Re-architected a YAML-based form flow engine with zero regression defects, resolved 30+ production bugs, and delivered 20+ framework enhancements. Led migration of 70+ JavaScript files to TypeScript (~30% fewer runtime errors), mentored 5+ engineers, and drove AI-assisted workflows across a 10M+ LOC codebase improving productivity by 2x for 200+ developers.',
+    description: `I joined Glow Developer Experience team with one mission: make it easier for 20+ product teams to build better software, faster. Over time, that evolved into something I didn't expect — becoming one of the earliest internal voices pushing for AI-assisted engineering. I built agent orchestration workflows, MCP servers, and Copilot tooling that ultimately 2x'd productivity for 200+ developers across a 10M+ line codebase. Beyond the AI work, I re-architected core framework engines, led TypeScript migrations that cut runtime errors by 30%, and mentored engineers through some genuinely complex, domain-heavy problems. What I'm most proud of? Owning hard problems end-to-end — from the first line of investigation to the last line of production code.`,
   },
   {
     from: 'Mar 2023',

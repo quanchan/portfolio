@@ -46,7 +46,7 @@ export default function IntroHero() {
             className="rounded-full bg-white px-6 py-3 text-sm font-medium
               text-neutral-900 transition hover:bg-neutral-200"
           >
-            Explore My Experience →
+            Explore My Career →
           </a>
           <a
             href="#projects"
