@@ -26,7 +26,7 @@ const links = [
     download: undefined,
   },
   {
-    href: `${base}/CV.pdf`,
+    href: `${base}/Alan_Tran_CV.pdf`,
     label: 'Download CV',
     icon: undefined,
     text: 'CV',
