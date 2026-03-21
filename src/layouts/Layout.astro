@@ -27,24 +27,11 @@ const {
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap" rel="stylesheet" />
-    <!-- Preload project card images so they're cached before the user scrolls -->
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/ptemagic1.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/ptemagic2.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/ptemagic3.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/datawise1.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/datawise2.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/datawise3.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/valentine1.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/valentine2.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/valentine3.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/todo-rpg1.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/todo-rpg2.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/project_img/todo-rpg3.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/gradients/gradient1.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/gradients/gradient2.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/gradients/gradient3.avif`} />
-    <link rel="preload" as="image" type="image/avif" href={`${import.meta.env.BASE_URL}/assets/gradients/gradient4.avif`} />
+    <!-- Preload the actual font file to skip the Google Fonts CSS roundtrip -->
+    <link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/lexendmega/v27/qFdA35aBi5JtHD41zSTFEs7N4hoiiVI6.woff2" crossorigin />
+    <!-- Non-render-blocking font stylesheet via media="print" trick -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend+Mega:wght@100..900&display=swap" /></noscript>
   </head>
   <body class="bg-neutral-950 text-neutral-100 antialiased">
     <script is:inline>

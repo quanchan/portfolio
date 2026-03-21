@@ -12,7 +12,7 @@ import NavBar from '../components/NavBar';
 ---
 
 <Layout title="Alan Tran Portfolio">
-  <NavBar client:load />
+  <NavBar client:idle />
   <SocialLinks />
   <main>
     <section
@@ -21,7 +21,7 @@ import NavBar from '../components/NavBar';
         px-0 py-0"
     >
       <div class="absolute inset-0">
-        <IntroBackground client:load />
+        <IntroBackground client:idle />
       </div>
       <div class="section-shell relative z-10 py-28 md:py-32">
         <IntroHero
@@ -31,11 +31,11 @@ import NavBar from '../components/NavBar';
     </section>
 
     <section id="experience" class="mx-auto w-full max-w-[88rem] px-6 py-20 md:px-10 md:py-24">
-      <ExperienceTimeline client:load />
+      <ExperienceTimeline client:idle />
     </section>
 
     <section id="projects" class="section-shell">
-      <ProjectShowcase client:load />
+      <ProjectShowcase client:visible />
     </section>
 
     <section id="tech-stack">
